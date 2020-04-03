@@ -1,1 +1,0 @@
-from nzb_auth import app
