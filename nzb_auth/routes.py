@@ -1,4 +1,4 @@
-from flask import render_template, flash, redirect, Response
+from flask import render_template, flash, redirect, Response, url_for
 from nzb_auth import app
 from nzb_auth.forms import LoginForm
 
@@ -26,7 +26,7 @@ def login():
         flash('Login requested for user {}, remember_me={}'.format(
             form.username.data, form.remember_me.data))
         print(f'Username: {form.username.data} Password: {form.password.data}')
-        return redirect('/index')
+        return redirect(url_for(index))
     #return Response("{'a':'b'}", status=401, mimetype='application/json')
     #return render_template()
     return render_template('login.html', title='Sign In', form=form)
