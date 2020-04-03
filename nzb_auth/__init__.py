@@ -8,4 +8,4 @@ app.config.from_object(Config)
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
-from nzb_auth import routes
+from nzb_auth import routes,models
