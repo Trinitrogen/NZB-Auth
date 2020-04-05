@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Hi, {{ current_user.username }}!</h1>
+    <div>
+        Sites:
+        <a href="/index">Home</a>
+        <a href="/sabnzbd">SabNZBD</a>
+        <a href="/sonarr">Sonarr</a>
+        <a href="/radarr">Radarr</a>
+        <a href="/tautulli">Tautulli</a>
+    </div>
+{% endblock %}

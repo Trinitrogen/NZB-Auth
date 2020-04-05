@@ -1,0 +1,43 @@
+##
+# Example of a site config for nginx. Should be copied into your existing config after
+# setting up Let's Encrypt Certificaate
+##
+
+server {
+
+    root /var/www/[SERVER DIRECTORY]/html;
+
+	index index.html index.htm index.nginx-debian.html;
+
+	server_name [SERVER NAME];
+
+    error_page 401 = @error401;
+        
+	location / {
+        auth_request    /nzb_auth;
+	}
+
+    #If user is logged in, 200 gets returned, otherwise 401
+    location = /nzb_auth {
+        internal;
+        proxy_pass  [http://SERVER NAME]/nzb_auth;
+        proxy_pass_request_body off;
+        proxy_set_header Content-Length "";
+        proxy_set_header        X-Original-URI $request_uri;
+    }
+
+    #login route for nzb_auth
+    location /login {
+        proxy_pass [http://SERVER NAME]/login;
+        proxy_set_header        X-Original-URI $request_uri;
+    }
+
+    #If not logged in /nzb_auth responds with 401, nginx redirects to /login
+    location @error401 {
+        return 302 [http://SERVER NAME]/login;
+}
+
+[CERT BOT INFORMATION]
+
+}
+
