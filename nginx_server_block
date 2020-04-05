@@ -10,10 +10,11 @@ server {
 	index index.html index.htm index.nginx-debian.html;
 
 	server_name [SERVER NAME];
+
+    error_page 401 = @error401;
         
 	location / {
         auth_request    /nzb_auth;
-        error_page 401 = @error401;
 	}
 
     #If user is logged in, 200 gets returned, otherwise 401
